@@ -74,7 +74,7 @@ for word, index in word_index.items(): # iterate over comment dictionary
 # specifying model
 inp = Input(shape = (max_len, ))
 
-x = Embedding(max_feat, embed_size, weights=[embedding_matrix])(inp)
+x = Embedding(max_feat, embed_size, weights = [embedding_matrix])(inp)
 x = Bidirectional(LSTM(50, return_sequences = True, dropout = 0.1, recurrent_dropout = 0.1))(x)
 x = GlobalMaxPool1D()(x)
 x = Dense(50, activation = "relu")(x)
