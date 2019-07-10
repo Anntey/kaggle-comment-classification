@@ -8,3 +8,5 @@ Evaluation: mean column-wise ROC AUC (i.e. the score is the average of the indiv
 
 Solution: bi-directional LSTM using GloVe word embeddings (Python, Keras)
 
+Success: 0.9784 AUC
+
