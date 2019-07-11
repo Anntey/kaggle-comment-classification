@@ -6,7 +6,7 @@ Task: predict the probability for each of the six possible types of comment toxi
 
 Evaluation: mean column-wise ROC AUC (i.e. the score is the average of the individual AUCs of each predicted column)
 
-Solution: bi-directional LSTM using GloVe word embeddings (Python, Keras)
+Solution: bi-directional LSTM-RNN using GloVe word embeddings (Python, Keras)
 
 Success: 0.9784 AUC
 
