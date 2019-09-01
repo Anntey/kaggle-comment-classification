@@ -1,4 +1,4 @@
-# Kaggle: Toxic Comment Classification Challenge
+# Kaggle: Toxic Comment Classification Challenge ([link](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/overview))
 
 Data: 153 165 Wikipedia comments
 
