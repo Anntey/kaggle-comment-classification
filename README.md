@@ -10,7 +10,7 @@ Solution: bi-directional LSTM-RNN using GloVe word embeddings
 
 Success: 0.9784 AUC
 &nbsp;
-
+&nbsp;
 > Before you start throwing accusations and warnings at me, lets review the edit itself-making ad hominem attacks isn't going to strengthen your argument, it will merely make it look like you are abusin...
 
 > Oh, and the girl above started her arguments with me. She stuck her nose where it doesn't belong. I believe the argument was between me and Yvesnimmo. But like I said, the situation was settled and I ...
