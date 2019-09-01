@@ -10,4 +10,4 @@ Solution: bi-directional LSTM-RNN using GloVe word embeddings
 
 Success: 0.9784 AUC
 
-> test
+> 	Before you start throwing accusations and warnings at me, lets review the edit itself-making ad hominem attacks isn't going to strengthen your argument, it will merely make it look like you are abusin...
