@@ -9,7 +9,7 @@ Evaluation: mean column-wise ROC AUC (i.e. the score is the average of the indiv
 Solution: bi-directional LSTM-RNN using GloVe word embeddings
 
 Success: 0.9784 AUC
-
+&nbsp;
 
 > Before you start throwing accusations and warnings at me, lets review the edit itself-making ad hominem attacks isn't going to strengthen your argument, it will merely make it look like you are abusin...
 
