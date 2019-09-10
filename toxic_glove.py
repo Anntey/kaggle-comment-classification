@@ -1,3 +1,6 @@
+#############
+# Libraries #
+#############
 
 import numpy as np
 import pandas as pd
@@ -7,7 +10,10 @@ from keras.preprocessing.sequence import pad_sequences
 from keras.layers import Dense, Input, LSTM, Embedding, Dropout, Bidirectional, GlobalMaxPool1D
 from keras.models import Model
 
-# loading data
+################
+# Loading data #
+################
+
 base_path = "./toxic/"
 input_path = "./toxic/input/"
 
@@ -23,7 +29,10 @@ targets_train = train_df[classes_list].values
 comments_list_train = train_df["comment_text"]
 comments_list_test = test_df["comment_text"]
 
-# tokenization of comments and indexing of words
+#############################
+# Tokenization and indexing #
+#############################
+
 max_feat = 20000 # unique words (rows in embedding vector)
 
 tokenizer = Tokenizer(num_words = max_feat)
@@ -32,18 +41,17 @@ tokenizer.fit_on_texts(list(comments_list_train)) # create word indices
 tokenized_list_train = tokenizer.texts_to_sequences(comments_list_train)
 tokenized_list_test = tokenizer.texts_to_sequences(comments_list_test)
 
-# fixing length of comments by padding
 num_words = [len(comment) for comment in tokenized_list_train]
 
-plt.hist(num_words, bins = np.arange(0, 410, 10))
+plt.hist(num_words, bins = np.arange(0, 410, 10)) # visualize word length
 plt.show()
 
-# fixing length of comments by padding
 max_len = 200
-comments_train = pad_sequences(tokenized_list_train, maxlen = max_len)
+comments_train = pad_sequences(tokenized_list_train, maxlen = max_len) # fixing length of comments by padding
 comments_test = pad_sequences(tokenized_list_test, maxlen = max_len)
 
-# glove embeddings
+# ------------ GloVe embeddings ------------
+
 embed_size = 50 # word vector size
 
 def get_coefs(word, *arr):
@@ -56,9 +64,8 @@ embeddings_index = dict(
 )
 
 all_embs = np.stack(embeddings_index.values())
-emb_mean = all_embs.mean() # use the same mean and stdev of embeddings
-emb_std = all_embs.std() # glove has when generating the random init
-
+emb_mean = all_embs.mean() # use the same mean and stdev of embeddings glove has when generating the random init
+emb_std = all_embs.std()
 
 word_index = tokenizer.word_index
 num_words = min(max_feat, len(word_index))
@@ -71,7 +78,10 @@ for word, index in word_index.items(): # iterate over comment dictionary
     if embedding_vector is not None:
         embedding_matrix[index] = embedding_vector # set value if found
     
-# specifying model
+#################
+# Specify model #
+#################
+
 inp = Input(shape = (max_len, ))
 
 x = Embedding(max_feat, embed_size, weights = [embedding_matrix])(inp)
@@ -89,7 +99,10 @@ model.compile(
         metrics = ["accuracy"]
 )
 
-# fitting model
+#############
+# Fit model #
+#############
+
 model.fit(
         comments_train,
         targets_train,
@@ -98,6 +111,9 @@ model.fit(
         validation_split = 0.1
 )
 
-# predictions
+##############
+# Prediction #
+##############
+
 subm_df[classes_list] = model.predict([comments_test], batch_size = 1024)
 subm_df.to_csv(base_path + "toxic_subm_glove.csv", index = False)  
