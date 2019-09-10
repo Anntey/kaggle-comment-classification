@@ -1,3 +1,6 @@
+#############
+# Libraries #
+#############
 
 import numpy as np
 import pandas as pd
@@ -7,7 +10,10 @@ from keras.preprocessing.sequence import pad_sequences
 from keras.layers import Dense, Input, LSTM, Embedding, Dropout, Bidirectional, GlobalMaxPool1D
 from keras.models import Model
 
-# loading data
+################
+# Loading data #
+################
+
 base_path = "./toxic/"
 input_path = "./toxic/input/"
 
@@ -23,7 +29,10 @@ targets_train = train_df[classes_list].values
 sentences_list_train = train_df["comment_text"]
 sentences_list_test = test_df["comment_text"]
 
-# tokenization of comments and indexing of words
+#############################
+# Tokenization and indexing #
+#############################
+
 max_feat = 20000 # unique words (rows in embedding vector)
 
 tokenizer = Tokenizer(num_words = max_feat)
@@ -32,18 +41,19 @@ tokenizer.fit_on_texts(list(sentences_list_train)) # create word indices
 tokenized_list_train = tokenizer.texts_to_sequences(sentences_list_train)
 tokenized_list_test = tokenizer.texts_to_sequences(sentences_list_test)
 
-# visualizing word length
 num_words = [len(comment) for comment in tokenized_list_train]
 
-plt.hist(num_words, bins = np.arange(0, 410, 10))
+plt.hist(num_words, bins = np.arange(0, 410, 10)) # visualize word length
 plt.show()
 
-# fixing length of comments by padding
 max_len = 200
-comments_train = pad_sequences(tokenized_list_train, maxlen = max_len)
+comments_train = pad_sequences(tokenized_list_train, maxlen = max_len) # fixing length of comments by padding
 comments_test = pad_sequences(tokenized_list_test, maxlen = max_len)
 
-# specifying model
+#################
+# Specify model #
+#################
+
 embed_size = 50 # word vector size
 
 inp = Input(shape = (max_len, ))
@@ -63,7 +73,10 @@ model.compile(
         metrics = ["accuracy"]
 )
 
-# fitting model
+#############
+# Fit model #
+#############
+
 model.fit(
         comments_train,
         targets_train,
@@ -72,6 +85,9 @@ model.fit(
         validation_split = 0.1
 )
 
-# predictions
+##############
+# Prediction #
+##############
+
 subm_df[classes_list] = model.predict([comments_test], batch_size = 1024)
 subm_df.to_csv(base_path + "toxic_subm.csv", index = False)  
