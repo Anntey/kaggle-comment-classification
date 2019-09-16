@@ -1,3 +1,4 @@
+
 #############
 # Libraries #
 #############
@@ -51,7 +52,6 @@ comments_train = pad_sequences(tokenized_list_train, maxlen = max_len) # fixing 
 comments_test = pad_sequences(tokenized_list_test, maxlen = max_len)
 
 # ------------ GloVe embeddings ------------
-
 embed_size = 50 # word vector size
 
 def get_coefs(word, *arr):
