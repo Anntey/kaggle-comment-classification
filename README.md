@@ -4,7 +4,7 @@ __Data__: 153 165 Wikipedia comments
 
 __Task__: predict the probability for each of the six possible types of comment toxicity
 
-__Evaluation__: mean column-wise ROC AUC (i.e. the score is the average of the individual AUCs of each predicted column)
+__Evaluation__: mean column-wise ROC AUC (i.e. the average of the individual AUCs of each predicted column)
 
 __Solution__: bi-directional LSTM-RNN using GloVe word embeddings
 
