@@ -6,7 +6,7 @@ __Task__: predict the probability for each of the six possible types of comment 
 
 __Evaluation__: mean column-wise ROC AUC (i.e. the average of the individual AUCs of each predicted column)
 
-__Solution__: bi-directional LSTM-RNN using GloVe word embeddings
+__Solution__: bi-directional LSTM-RNN using GloVe[<sup>[1]</sup>](https://nlp.stanford.edu/projects/glove/) word embeddings
 
 __Success__: 0.978 AUC
 
